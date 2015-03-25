@@ -108,6 +108,9 @@ class WC_Emails {
 		add_action( 'woocommerce_no_stock_notification', array( $this, 'no_stock' ) );
 		add_action( 'woocommerce_product_on_backorder_notification', array( $this, 'backorder' ) );
 		add_action( 'woocommerce_created_customer_notification', array( $this, 'customer_new_account' ), 10, 3 );
+		
+		// Adding autop back in for anyone who wants it
+		add_filter( 'woocommerce_wrap_message_content', 'wpautop' );
 
 		// Let 3rd parties unhook the above via this hook
 		do_action( 'woocommerce_email', $this );
@@ -194,7 +197,7 @@ class WC_Emails {
 
 		do_action( 'woocommerce_email_header', $email_heading );
 
-		echo wpautop( wptexturize( $message ) );
+		echo apply_filters( 'woocommerce_wrap_message_content', wptexturize( $message ) );
 
 		do_action( 'woocommerce_email_footer' );
 
