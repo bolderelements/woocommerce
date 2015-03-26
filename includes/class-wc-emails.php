@@ -216,7 +216,7 @@ class WC_Emails {
 	public function send( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = "" ) {
 		// Send
 		$email = new WC_Email();
-		$email->send( $to, $subject, $message, $headers, $attachments );
+		return $email->send( $to, $subject, $message, $headers, $attachments );
 	}
 
 	/**
